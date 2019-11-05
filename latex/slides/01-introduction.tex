@@ -22,8 +22,10 @@
 % 	Language?\\
 	Requirements
 	\begin{itemize}
+	           \item Please bring your computer with You or become familiar with the PC Pool
 		\item You know how to use a computer
-        \item Please bring your computer with You
+		\item Basic knowledge in mathematics and logic
+        		\item Installed JDK and IDE (BlueJ/IntelliJ/Eclipse)
 		\item Maybe already knowledge in programming languages?
 % 		\item Java is not your first programming language or you are a fast learner
 	\end{itemize}
@@ -39,14 +41,13 @@
 	\begin{itemize}
 		\item You can ask your tutor
 		\item Join the Auditorium group \hfill \\
-			\url{http://auditorium.inf.tu-dresden.de}
+			\url{https://auditorium.inf.tu-dresden.de/en/groups/110804211}
 		\item StackOverflow, FAQs, Online-tutorials, ... \hfill \\
 		\item Official documentation \hfill \\
-			\url{https://docs.oracle.com/javase/8/}
-        \item mailinglist \url{programmierung@ifsr.de}
-        \item Cyberspace (wednesday 5./6. DS)
-		\item Material-Repository \\
-			\url{https://github.com/LeonardFollner/java-lessons}
+			\url{https://docs.oracle.com/javase/13/}
+           \item mailinglist \url{programmierung@ifsr.de}
+	\item Material-Repository \\
+		\url{https://github.com/FriwiDev/java-lessons}
 	\end{itemize}
 \end{frame}
 
@@ -73,7 +74,6 @@
 		\item A lot of unnecessary features \\ in the JDK
 		\item Slower than assembly
 		\item No multi-inheritance
-		\item Weak generics
 		\item Mediocre support for other programming paradigms
 		\item[] $->$ Neither fast, small nor geeky
 	\end{itemize}
@@ -85,13 +85,12 @@
 \end{frame}
 
 \begin{frame}[fragile]{Creating your Working Environment}
-  Open the Terminal
-  \begin{lstlisting}
-      mkdir myProgram
-      cd myProgram
-      touch Hello.java
-      vim Hello.java
-  \end{lstlisting}
+  \begin{itemize}
+  	\item Open BlueJ and create a new project\\
+  		\item IntelliJ users will need to take different steps (just try on your own or ask us)
+  	\item Create a new class, name it ``Hello''
+  	\item Right click on your new class, choose ``Edit''
+  \end{itemize}
 \end{frame}
 
 \subsection{Hello World!}
@@ -118,31 +117,13 @@
 \end{frame}
 
 \begin{frame}[fragile]{How to run your program}
-   save your program by pressing 'esc', then ':w'
-   exit vim by typing ':q' (and hit return)
-   then:
-   \begin{lstlisting}[language=bash]
-      javac Hello.java
-      java Hello
-   \end{lstlisting}
-\end{frame}
-
-\subsection{Setting up IntelliJ IDEA}
-
-\begin{frame}{Hello World in an IDE}
-   DEMO
-\end{frame}
-
-\begin{frame}{Receive a copy of IntelliJ IDEA}
-  IntelliJ IDEA is a powerful IDE\footnote{Integrated Development Environment}, e.g. for Java.
-  \begin{itemize}
-      \item You can download IntelliJ IDEA at  \\
-          \url{https://www.jetbrains.com/idea/}
-      \item Get an Ultimate-License at \\
-          \url{https://www.jetbrains.com/student/}
-      \item Use JetBrains IDEs for all programming languages
+   \begin{itemize}
+  	\item Click on ``translate'' in the class edit dialogue
+  	\item Check if there have been any compile errors
+  	\item If not, right-click the class in the root window
+  	\item Choose the ``void main(String[] args)'' method to be executed
+  	\item In the appearing dialogue, just press ``OK''
   \end{itemize}
-  Ecplipse is free and open-source, but less powerful.
 \end{frame}
 
 \section{Basics}
