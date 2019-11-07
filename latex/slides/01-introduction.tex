@@ -88,8 +88,7 @@
     \begin{lstlisting}
     public class Hello {
 
-    }
-    \end{lstlisting}
+    }\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]{Hello World!}
@@ -99,8 +98,7 @@
         public static void main(String[] args) {
             System.out.println("Hello World!");
         }
-    }
-    \end{lstlisting}
+    }\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]{How to run your program}
@@ -118,18 +116,18 @@
 \begin{frame}[fragile]{Comments}
    \begin{lstlisting}
    public class Hello {
-       // prints a "Hello World!" on your console
+       // a single line comment
        public static void main(String[] args) {
            System.out.println("Hello World!");
+           /* a comment
+           spanning
+           multiple lines
+           */
        }
-   }
-   \end{lstlisting}
-   You should always comment your code. \\
-   Code is read more often than it is written.
+   }\end{lstlisting}
    \begin{itemize}
-       \item // single line comment
-       \item /* comment spanning \\
-           multiple lines */
+       \item // endet am Zeilenende
+       \item /* endet mit */
    \end{itemize}
 \end{frame}
 
@@ -138,7 +136,6 @@
 \begin{frame}[fragile]{Code concepts}
     \begin{lstlisting}
     public class Hello {
-        // Calculates some stuff and outputs everything on the console
         public static void main(String[] args) {            
             int x;
             x = 9;
@@ -148,30 +145,27 @@
             
             System.out.println(z);
         }
-    }
-    \end{lstlisting}
+    }\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]{Code concepts}
     \begin{lstlisting}
     public class Hello {
-        // Calculates some stuff and outputs everything on the console
         public static void main(String[] args) {
             System.out.println(9 * 23);
         }
-    }
-    \end{lstlisting}
+    }\end{lstlisting}
 \end{frame}
 
 \begin{frame}{Primitive data types}
     Java supports some primitive data types:
     \begin{itemize}
         \item[boolean] a truth value (either \textbf{true} or \textbf{false})
-        \item[int] a 32 bit integer
-        \item[long] a 64 bit integer
-        \item[float] a 32 bit floating point number
-        \item[double] a 64 bit floating point number
-        \item[char] an ascii character
+        \item[int] a 32 bit integer (e.g. 127 or -2147483648)
+        \item[long] a 64 bit integer (e.g. -9,223,372,036,854,775,808)
+        \item[float] a 32 bit floating point number (e.g. 3.14159F)
+        \item[double] a 64 bit floating point number (e.g. 3.15159)
+        \item[char] an ascii character (e.g. \textquotesingle A\textquotesingle, \textquotesingle \_\textquotesingle, \textquotesingle \enspace\textquotesingle)
         \item[void] the empty type (needed in later topics)
     \end{itemize}
 \end{frame}
@@ -181,23 +175,22 @@
     public class Hello {
         // prints a "Hello World!" on your console
         public static void main(String[] args) {
-            System.out.println("Hello World!")@\textcolor{red}{\texttt{;}}@
+            System.out.println("Hello World!");
         }
-    }
-    \end{lstlisting}
+    }\end{lstlisting}
     Semicolons conclude all statements. \\
     Blocks do not need a semicolon.
 \end{frame}
 
 \begin{frame}[fragile]{Blocks}
     \begin{lstlisting}
-    public class Hello @\textcolor{red}{\texttt{\{}}@
-        // prints a "Hello World!" on your console
+    public class Hello {
+    
         public static void main(String[] args) {
             System.out.println("Hello World!");
         }
-    @\textcolor{red}{\texttt{\}}}@
-    \end{lstlisting}
+        
+    }\end{lstlisting}
     Everything between \{ and \} is a \emph{block}. \\
     Blocks may be nested.
 \end{frame}
@@ -205,7 +198,7 @@
 \begin{frame}[fragile]{Naming of Variables}
     \begin{itemize}
         \item The names of variables can begin with any letter or underscore. \\
-        Usually the name starts with small letter.
+        \item Variables and functions start with small, classes with capital letters.
         \item Compound names should use CamelCase.
         \item Use meaningful names.
     \end{itemize}
@@ -218,8 +211,7 @@
 
             int rotationCount = 7; // there you go
         }
-    }
-    \end{lstlisting}
+    }\end{lstlisting}
 \end{frame}
 
 \subsection{Calculating}
@@ -236,8 +228,7 @@
             a = a + 2;
             System.out.println(a); // prints: 10
         }
-    }
-    \end{lstlisting}
+    }\end{lstlisting}
     After the first assignment the variable is initialized.
 \framebreak
     \begin{lstlisting}
@@ -251,17 +242,15 @@
             a++; // increments a
             System.out.println(a); // prints: -8
         }
-    }
-    \end{lstlisting}
-
+    }\end{lstlisting}
 \framebreak
     Some basic mathematical operations:
     \begin{tabular}{ll}
-        Addition & \texttt{a + b;} \\
-        Subtraction & \texttt{a - b;} \\
-        Multiplication &\texttt{a * b;} \\
-        Division & \texttt{a / b;} \\
-        Modulo & \texttt{a \% b;} \\
+        Addition & \texttt{a + b} \\
+        Subtraction & \texttt{a - b} \\
+        Multiplication &\texttt{a * b} \\
+        Division & \texttt{a / b} \\
+        Modulo & \texttt{a \% b} \\
         Increment & \texttt{a++;} \\
         Decrement & \texttt{a--;} \\
     \end{tabular}
@@ -277,8 +266,7 @@
             System.out.println(b); // prints: 7.5
             System.out.println(a + b); // prints: 16.5
         }
-    }
-    \end{lstlisting}
+    }\end{lstlisting}
 \framebreak
     \begin{lstlisting}
     public class Calc {
@@ -289,8 +277,7 @@
             System.out.println(b); // prints: 3054062.5
             System.out.println(a + b); // prints: 3054071.5
         }
-    }
-    \end{lstlisting}
+    }\end{lstlisting}
     Float has a limited precision. \\
     \emph{This might lead to unexpected results!}
 \end{frame}
@@ -305,8 +292,7 @@
             float c = a + b;
             System.out.println(c); // prints: 12.3
         }
-    }
-    \end{lstlisting}
+    }\end{lstlisting}
     Java converts from \textbf{int} to \textbf{float} by default, if necessary. \\
     But not vice versa.
 \end{frame}
@@ -322,8 +308,7 @@
             String hello = "Hello World!";
             System.out.println(hello); // print: Hello World!
         }
-    }
-    \end{lstlisting}
+    }\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]{Concatenation}
@@ -336,8 +321,7 @@
             System.out.println(sentence);
             System.out.println(hello + " World!");
         }
-    }
-    \end{lstlisting}
+    }\end{lstlisting}
     You can concatenate Strings using the +. Both printed lines look the same.
 \end{frame}
 
@@ -352,9 +336,9 @@
                 factorA + " * " + factorB + " = " + product;
             System.out.println(answer); // prints: 3 * 7 = 21
         }
-    }
-    \end{lstlisting}
+    }\end{lstlisting}
     Upon concatenation, primitive types will be replaced by their current value as \emph{String}.
 \end{frame}
 
 \end{document}
+
