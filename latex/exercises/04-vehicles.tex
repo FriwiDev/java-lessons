@@ -1,0 +1,39 @@
+\input{../templates/course_definitions}
+\input{../templates/exercise_information}
+
+\title{Exercise}
+\subtitle{Vehicles}
+\date{\today}
+
+
+\begin{document}
+
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}{Vehicles}
+    There are multiple types of vehicles. Cars and Motorcycles are examples. Electric cars are special cars. Each vehicle type has a certain amount of wheels and is manufactured by a manufacturer. Whether taxes have to be paid or not is described by a boolean, which is true by default. Cars can have an autopilot. Electric cars have a battery capacity and do not have to pay taxes.
+\end{frame}
+
+\begin{frame}{Vehicles}
+    Tasks:
+    \begin{itemize}
+        \item Model the classes ``Vehicle'', ``Car'', ``ElectricCar'' and ``Motorcycle''
+        \item Add the needed attributes and methods
+        \item Create constructors, which ask for the vehicle brand and for the electric car, additonally the battery capacity
+        \item The method ``toString'' should return the manufacturer and for electric cars, also the battery capacity
+        \item Create a class ``Garage'', which creates one instance of each vehicle type (the class contains a main method). Print the name, amount of wheels and the tax status for each vehicle.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Vehicles}
+    Tasks:
+    \begin{itemize}
+        \item The amount of wheels should not be changeable externally
+        \item It should be impossible to create an instance of the class ``Vehicle''
+    \end{itemize}
+\end{frame}
+
+\end{document}
+
