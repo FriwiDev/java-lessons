@@ -32,8 +32,7 @@
         } else {
             System.out.println("Dear Sir/Madam,");    
         }
-    }
-    \end{lstlisting}
+    }\end{lstlisting}
 \end{frame}
 \begin{frame}[fragile]{Differentiate with Switch}
     \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
@@ -55,31 +54,9 @@
                 System.out.println("Dear Sir/Madam,");
                 break;
         }
-    }
-    \end{lstlisting}
+    }\end{lstlisting}
 \end{frame}
-\begin{frame}[fragile]{Differentiate with Switch}
-    Depending on a variable you can switch the execution paths using the keyword \textbf{switch}.
-    This works with \texttt{int}, \texttt{char} and \texttt{String}. \\
-    \vfill
-    The variable is compared 
-    with the value following the keyword case.
-    % Strings are not compared - dot.equal
-    If they are equal the program will enter the corresponding case block.
-    If nothing fits the program will enter the default block.
-    \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
-    public static void main (String[] args) {
-        switch(intVariable) {
-            case 1:
-                doSomething();
-                break;
-            default:
-                doOtherThings();
-                break;
-        }
-    }
-    \end{lstlisting}
-\end{frame}
+
 \begin{frame}[fragile]{Break}
     After the last command of the case block    you can tell the program to leave using \textbf{break}.\\
     Without \textbf{break} the program will continue regardless of
@@ -97,8 +74,7 @@
                 System.out.println("enter default case");
                 break;
         }
-    }
-    \end{lstlisting}
+    }\end{lstlisting}
 \end{frame}
 
 \subsection{Break \& Continue}
@@ -113,8 +89,7 @@
                 break;
             }
         }
-    }
-    \end{lstlisting}
+    }\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]{Continue}
@@ -128,8 +103,7 @@
             }
             System.out.println("i = " + i);
         }
-    }
-    \end{lstlisting}
+    }\end{lstlisting}
 \end{frame}
 
 \subsection{return}
@@ -150,8 +124,7 @@
     ...
     
     Numbers numbers = new Numbers();
-    int return = numbers.addNumbers();
-    \end{lstlisting}
+    int return = numbers.addNumbers();\end{lstlisting}
     
     Return works with every primitiv and complex data type.
     
@@ -166,8 +139,7 @@
     private Calculator calc;
     public Calculator getCalcualtor() {
         return calc;
-    }
-    \end{lstlisting}
+    }\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]{return}
@@ -176,46 +148,38 @@
     \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
     public void setNumber(int number) {
         this.number = number;
-    }
-    \end{lstlisting}
+    }\end{lstlisting}
 \end{frame}
 
 \section{Static}
 \subsection{Overview}
 %TODO improve this overview - add an example - think about the headline
 \begin{frame}{Static Keyword}
-    An object is an instance of a class with its attributes and methods.
-    The object is the actor and the class just a blueprint.
-    \vfill
-    Static class members are not linked to a certain instance of the class.
-    Therefore the class can also be an actor.
-    \vfill
-    Static class members are:
-    \begin{itemize}
-        \item static attributes, often called class variables
-        \item static methods, often called class methods
-    \end{itemize}
+    
+    Static attributes or methods do not belong to the objects of a class.
+    They belong to the class itself.
+
 \end{frame}
 
 \subsection{Examples}
 \begin{frame}[fragile]{Class Variables}
-    In the setter \texttt{count} is addressed via \texttt{Example.count}.
-    Using \texttt{this.count} is misleading, because \texttt{count} is a class variable.    
     \begin{lstlisting}
     public class Example {
     
-        public static count;
+        public static int classCounter;
+        public int myCounter;
 
-        public setCount(int count) {
-            Example.count = count;
+        public addCount(int count) {
+            // all objects share this one classCounter
+            Example.classCounter += count;
+            
+            // every object has their own myCounter
+            this.myCounter += count;
         }
-    }
-    \end{lstlisting}
+    }\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]{Class Variables - Test}
-    The test prints the class variable \texttt{Example.count} which is altered
-    by the different instances of the class \emph{Example}.    
     \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
     public class ExampleTest {
     
@@ -223,13 +187,14 @@
             Example e1 = new Example();
             Example e2 = new Example();
             
-            e1.setCount(4);
-            System.out.println(Example.count); // prints: 4
-            e2.setCount(8);
-            System.out.println(Example.count); // prints: 8
+            e1.addCount(4);
+            e2.addCount(5);
+            
+            System.out.println(e1.myCounter);
+            System.out.println(e2.myCounter);
+            System.out.println(Example.classCounter);
         }
-    }
-    \end{lstlisting}
+    }\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]{Class Methods}
@@ -243,30 +208,12 @@
         public static void setCount(int count) {
             Example.count = count;
         }
-    }
-    \end{lstlisting}
+    }\end{lstlisting}
     \begin{lstlisting}
     public static void main (String[] args) {
             
         Example.setCount(4);
-    }
-    \end{lstlisting}
-\end{frame}
-
-\subsection{Implications}
-\begin{frame}[fragile]{Static is an One-Way}
-    Methods from objects can:
-    \begin{itemize}
-        \item access attributes (object variables)
-        \item access class variables
-        \item call methods
-        \item call static methods
-    \end{itemize}
-    Class methods can:
-    \begin{itemize}
-        \item access class variables
-        \item call static methods
-    \end{itemize}
+    }\end{lstlisting}
 \end{frame}
 
 %\begin{frame}{When to use Static?}
@@ -284,15 +231,12 @@
 \section{Interfaces}
 \subsection{Overview}
 \begin{frame}{}
-    An \textbf{interface} is a well defined set of constants and methods a class have to \textbf{implement}.
+    An \textbf{interface} is a well defined set of methods a class has to \textbf{implement}.
     \vfill
-    You can access objects through their interfaces. So you can work with different kinds of objects easily.
-    \vfill
-    For Example: A post office offers to ship letters, postcards and packages. With an interface
-    \emph{Trackable} you can collect the positions unified. 
-    It is not important how a letter calculates its position.
-    %TODO rethink the following sentence
-    It is important that the letter communicate its position through the methods from the interface.
+    \textbf{Example:}
+    Letters, postcards and packages can all be tracked. They might be derived from different classes.
+    But ultimately each of them behaves similar as ``something that can be tracked``.
+    
     %vfill
     %conclusion: Seperation from definition and implementation. 
     %The definition is ?denoted by? the interface.
@@ -303,11 +247,10 @@
     \begin{lstlisting}
     public interface Trackable {
     
-        public int getStatus(int identifier);
+        public int getStatus();
         
-        public Position getPosition(int identifier);
-    }
-    \end{lstlisting}
+        public Position getPosition();
+    }\end{lstlisting}
     Note: The name of an interface often ends with the suffix \emph{-able}.
 \end{frame}
 \begin{frame}[fragile]{Letter implements Trackable}
@@ -317,15 +260,14 @@
         public Position position;
         private int identifier;
     
-        public int getStatus(int identifier) {
+        public int getStatus() {
             return this.identifier;
         }
         
-        public Position getPosition(int identifier) {
+        public Position getPosition() {
             return this.position;
         }
-    }
-    \end{lstlisting}
+    }\end{lstlisting}
     The classes \emph{Postcard} and \emph{Package} also implement the interface \emph{Trackable}.
 \end{frame}
 
@@ -333,15 +275,13 @@
     \begin{lstlisting}
     public static void main(String[] args) {
     
-        Trackable letter_1 = new Letter();
-        Trackable letter_2 = new Letter();
-        Trackable postcard_1 = new Postcard();
-        Trackable package_1 = new Package();
+        Trackable myLetter = new Letter();
+        Trackable myPackage = new Package();
+        Trackable myPostcard = new Postcard();
         
-        letter_1.getPosition(2345);
-        postcard_1.getStatus(1234);
-    }
-    \end{lstlisting}
+        Position pos = myLetter.getPosition();
+        int status = myPostcard.getStatus();
+    }\end{lstlisting}
 \end{frame}
 
 \subsection{Multiple Interfaces}
@@ -351,62 +291,59 @@
     \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
     public interface Buyable {
     
-        // constant
-        public float tax = 1.19f;
-    
         public float getPrice();
-    }
-    \end{lstlisting}
+    }\end{lstlisting}
     \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
     public interface Trackable {
     
-        public int getStatus(int identifier);
+        public int getStatus);
         
-        public Position getPosition(int identifier);
-    }
-    \end{lstlisting}
+        public Position getPosition();
+    }\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]{Postcard implements Buyable and Trackable}
     \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
     public class Postcard implements Buyable, Trackable {
     
+    
         public Position position;
         private int identifier;
-        private float priceWithoutVAT;
+        private float price;
         
         public float getPrice() {
-            return priceWithoutVAT * tax;
+            return this.price;
         }
     
-        public int getStatus(int identifier) {
+        public int getStatus() {
             return this.identifier;
         }
         
-        public Position getPosition(int identifier) {
+        public Position getPosition() {
             return this.position;
         }
-    }
-    \end{lstlisting}
+    }\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]{Access multiple Interfaces}
     \begin{lstlisting}
     public static void main(String[] args) {
     
-        Trackable postcard_T = new Postcard();
-        Postcard postcard_P = new Postcard();
-        Buyable postcard_B = new Postcard();
+        Postcard postcard = new Postcard();
+        
+        Trackable trackable = postcard;
+        Buyable buyable = postcard;
 
-        postcard_T.getStatus(1234);
-        postcard_B.getPrice();
-        postcard_P.getStatus(1234);
-        postcard_P.getPrice();
-    }
-    \end{lstlisting}
-    \texttt{postcard\_P} can access both interfaces.\\
-    \texttt{postcard\_T} can access Trackable.\\
-    \texttt{postcard\_B} can access Buyable.
+        ... = postcard.getStatus();
+        ... = postcard.getPrice();
+        
+        ... = trackable.getStatus();
+        ... = trackable.getPrice();
+        
+        ... = buyable.getStatus();
+        ... = buyable.getPrice();
+    }\end{lstlisting}
+    Careful, two lines are wrong!
 \end{frame}
 %deault methods and static methods
 \end{document}
