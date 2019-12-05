@@ -1,0 +1,47 @@
+\input{../templates/course_definitions}
+\input{../templates/exercise_information}
+
+\title{Exercise}
+\subtitle{Fibonacci Array}
+\date{\today}
+
+
+\begin{document}
+
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}[fragile]{Fibonacci Array}
+    A ``FibonacciArray'' can only contain numbers, that are also part of the fibonacci sequence. When other numbers are added, an unchecked ``NoFibonacciException'' is thrown.
+\end{frame}
+
+\begin{frame}{Fibonacci Array}
+    Tasks:
+    \begin{itemize}
+        \item Create a class ``FibonacciArray'', that implements the Interface ``Set'' (java.util.Set)
+        \item Create a new class ``NoFibonacciException''
+        \item Implement a method ``void add(Interger i)'', which performs as described above
+        \item Test your implementation with the test class on the next page
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Fibonacci Array}
+   \begin{lstlisting}
+public class Test {
+    public static void main(String[] args) {
+        FibonacciArray fiboMenge = new FibonacciArray();
+        for (int i = 0; i < 100; i++) { 
+            try {
+                fiboMenge.add(i);
+                System.out.println("FIB: " + i);
+            } catch (NoFibonacciException e) {
+                System.out.println("ERR: " + i);
+            } 
+        }
+    } 
+}\end{lstlisting}
+\end{frame}
+
+\end{document}
+

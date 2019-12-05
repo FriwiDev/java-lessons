@@ -16,6 +16,9 @@ xelatex 04-abstract.tex
 xelatex 05-interfaces.tex
 biber 05-interfaces
 xelatex 05-interfaces.tex
+xelatex 06-exceptions.tex
+biber 06-exceptions
+xelatex 06-exceptions.tex
 
 cd ../exercises
 xelatex 01-temperature.tex
@@ -27,3 +30,4 @@ xelatex 03b-multiplication-table.tex
 xelatex 04-vehicles.tex
 xelatex 05a-calculator.tex
 xelatex 05b-two-dimensional.tex
+xelatex 06-fibonacci-array.tex
