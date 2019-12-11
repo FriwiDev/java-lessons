@@ -19,6 +19,9 @@ xelatex 05-interfaces.tex
 xelatex 06-exceptions.tex
 biber 06-exceptions
 xelatex 06-exceptions.tex
+xelatex 07-collections.tex
+biber 07-collections
+xelatex 07-collections.tex
 
 cd ../exercises
 xelatex 01-temperature.tex
@@ -31,3 +34,4 @@ xelatex 04-vehicles.tex
 xelatex 05a-calculator.tex
 xelatex 05b-two-dimensional.tex
 xelatex 06-fibonacci-array.tex
+xelatex 07-library-part-3.tex
