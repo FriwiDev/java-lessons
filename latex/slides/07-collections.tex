@@ -1,10 +1,8 @@
 \input{../templates/course_definitions}
 \input{../templates/course_information}
 
-\usepackage{qtree}
-
 \title{Java}
-\subtitle{Exceptions}
+\subtitle{Collections}
 \date{\today}
 
 \begin{document}
@@ -17,236 +15,337 @@
 \tableofcontents
 \end{frame}
 
-\section{Exceptions}
+\section{Generics}
+\subsection{What is a generic}
+\begin{frame}[fragile]{Generics}
+    \begin{lstlisting}
+        Object myStringAsObject = "klaus";
+        String myStringAsString = (String) myStringAsObject;
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Generics}
+    \begin{lstlisting}
+        Object myStringAsObject = Integer.valueOf("42");
+        String myStringAsString = (String) myStringAsObject;
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Why it won't work:}
+        Integer can't be casted to String.
+        
+        The Code before will compile but still cause an Exception in the JVM.
+\end{frame}
+
+\begin{frame}[fragile]{Generics}
+    \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+        public class Box {
+            private Object object;
+
+            public void set(Object object) { this.object = object; }
+            public Object get() { return object; }
+        }
+
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Generics}
+    \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+        public class Box<T> {
+            // T stands for "Type"
+            private T t;
+
+            public void set(T t) { this.t = t; }
+            public T get() { return t; }
+        }
+        
+        Box<Integer> integerBox; = new Box<Integer>();
+
+    \end{lstlisting}
+\end{frame}
+
+\subsection{Wrapper Classes}
+
+\begin{frame}{Wrapper Class}
+    Primitive data types can not be elements in collections. 
+    Use wrapper classes like \emph{Integer} instead.
+    \begin{center}
+        \begin{tabular}{ c  c }
+            boolean & Boolean \\
+            byte & Byte \\
+            char & Character \\
+            int & Integer \\
+            float & Float \\
+            double & Double \\
+            long & Long \\
+            short & Short
+        \end{tabular}
+    \end{center}
+\end{frame}
+
+\section{Collections}
 \subsection{Overview}
-\begin{frame}{}
-    While running software many things can go wrong. 
-    You have to deal with errors or exceptional behavior. %AE
-    \vfill
-    Java offers exception handling out of the box.
-    Exceptions seperate error-handling from normal code.
-    \vfill
-    On this slide \emph{exception} means the Java term and \emph{error} a nonspecified general term.
+\begin{frame}{Collections Framework}
+    Java offers various data structures like \textbf{Sets}, \textbf{Lists} and \textbf{Maps}.
+    Those structures are part of the collections framework.
+
+    There are interfaces to access the data structures in an easy way.
+    There are multiple implementations for various needs.
+    Alternatively you can use your own implementations.
 \end{frame}
 
-\begin{frame}{Hierarchy}
-    \Tree [.Object [.Throwable Error [.Exception \dots{} RuntimeException ] ] ] \\
-    \vfill
-    Every exception is a subclass of \emph{Throwable}. 
-    \emph{Error} is also a subclass of \emph{Throwable} but used for serious errors
-    like \emph{VirtualMachineError}. \\
-    
-    \scriptsize\url{https://docs.oracle.com/javase/7/docs/api/java/lang/Throwable.html}
-\end{frame}
-
-\begin{frame}{Checked Exceptions}
-    Every exception except \emph{RuntimeException} and its subclasses are \textbf{checked exceptions}.
-    \vfill
-    A checked exception has to be handled or denoted.
-    \vfill
-    The cause of this kind of exception is often outside of your program.
-\end{frame}
-
-\begin{frame}{Unchecked Exceptions}
-    \emph{RuntimeException} and its subclasses are called \textbf{unchecked exceptions}.
-    \vfill
-    Unchecked Exceptions do not have to be denoted or handled, but can be.
-    Often handling is senseless because the program can not recover 
-    in case such exception occurs.
-    \vfill
-    The cause of an unchecked exception can be a method call with incorrect arguments.
-    Therefore any method could throw an unchecked exception.
-    Most unchecked exceptions are caused by the programer.
-    \vfill
-    Errors are also unchecked.
-\end{frame}
-
-\subsection{Catching Exceptions}    
-\begin{frame}[fragile]{Introduction}
+\subsection{Set and List}
+\begin{frame}[fragile]{Set}
+    A set is a collection that holds one type of objects.
+    A set can not contain one element twice.
+    Like all collections the interface \emph{Set} is part of the package \texttt{java.util}.
     \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
-    public class Calc {
-    
+    import java.util.*;
+
+    public class TestSet {
+        
         public static void main(String[] args) {
+            Set<String> set = new HashSet<String>();
+        
+            set.add("foo");
+            set.add("bar");
+            set.remove("foo");
+            System.out.println(set); // prints: [bar]
+        }
+    }
+    \end{lstlisting}
+    In the following examples \texttt{import java.util.*;} will be omitted.
+\end{frame}
+
+\begin{frame}[fragile]{List}
+    A list is an ordered collection.
+    \vfill
+    The implementation \texttt{LinkedList} is a double-linked list.
+    \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+    public static void main(String[] args) {
     
-            int a = 7 / 0;
-            // will cause an ArithmeticException
+        List<String> list = new LinkedList<String>();
+        
+        list.add("foo"); 
+        list.add("foo"); // insert "foo" at the end
+        list.add("bar");
+        list.add("foo");
+        list.remove("foo"); // removes the first "foo"
+        
+        System.out.println(list); // prints: [foo, bar, foo]
+    }
+    \end{lstlisting}
+\end{frame}
+    
+\begin{frame}[fragile]{List Methods}
+    some useful List methods:\\
+    \vspace{1em}
+    \begin{tabular}{ r l r }
+        void & \texttt{add(int index, E element)}
+        & \footnotesize{insert element at position index} \\
+        E &\texttt{get(int index)}
+        & \footnotesize{get element at position index} \\
+        E &\texttt{set(int index, E element)}
+        & \footnotesize{replace element at position index} \\
+        E &\texttt{remove(int index)}
+        & \footnotesize{remove element at position index}
+    \end{tabular}
+    \vfill
+    some useful LinkedList methods:\\
+    \vspace{1em}
+    \begin{tabular}{ r l r }
+        void & \texttt{addFirst(E element)}
+        & \footnotesize{append element to the beginning} \\
+        E & \texttt{getFirst()}
+        & \footnotesize{get first element} \\
+        void & \texttt{addLast(E element)}
+        & \footnotesize{append element to the end} \\
+        E & \texttt{getLast()}
+        & \footnotesize{get last element}
+    \end{tabular}
+\end{frame}
+
+\subsection{Iterating}
+\begin{frame}[fragile]{For Loop}
+    The for loop can iterate over every element of a collection:\\
+    \hspace{1em}\texttt{for (E e : collection)}
+    \begin{lstlisting}
+    public static void main(String[] args) {
+    
+        List<Integer> list = 
+            new LinkedList<Integer>();
+        
+        list.add(1);
+        list.add(3);
+        list.add(3);
+        list.add(7);
+        
+        for (Integer i : list) {
+            System.out.print(i + " "); // prints: 1 3 3 7
+        }
+    }
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Iterator}
+    An iterator iterates step by step over a collection.
+    \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+    public static void main(String[] args) {
+    
+        List<Integer> list = new LinkedList<Integer>();
+        
+        list.add(1);
+        list.add(3);
+        list.add(3);
+        list.add(7);
+        
+        Iterator<Integer> iter = list.iterator();
+        
+        while (iter.hasNext()) {
+            System.out.print(iter.next());
+        }
+        // prints: 1337
+    }
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Iterator}
+    A standard iterator has only three methods:
+    \begin{itemize}
+    \item \texttt{boolean hasNext()} - indicates if therer are more elements
+    \item \texttt{E next()} - returns the next element
+    \item \texttt{void remove()} - returns the current element
+    \end{itemize}
+    \vspace{1em}
+    The iterator is instanced via \texttt{collection.iterator()} :
+    \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+        Collection<E> collection = new Implementation<E>;
+        Iterator<E> iter = collection.iterator();
+    \end{lstlisting}
+    Special iterators like \emph{ListIterator} are more sophisticated.
+\end{frame}
+
+\subsection{Map}
+\begin{frame}[fragile]{Map}
+    The interface \emph{Map} is not a subinterface of \emph{Collection}.\\
+    A map contains pairs of key and value. Each key refers to a value. 
+    Two keys can refer to the same value. There are not two equal keys in one map.
+    \emph{Map} is part of the package \texttt{java.util}.
+    \vfill
+    \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+    public static void main (String[] args) {
+    
+        Map<Integer, String> map = 
+            new HashMap<Integer, String>();
+        
+        map.put(23, "foo");
+        map.put(28, "foo");
+        map.put(31, "bar");
+        map.put(23, "bar"); // "bar" replaces "foo" for key = 23
+        
+        System.out.println(map);
+        // prints: {23=bar, 28=foo, 31=bar}
+    }
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Key, Set and Values}
+    You can get the set of keys from the map.
+    Because one value can exist multiple times a collection is used for the values.
+    \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+    public static void main (String[] args) {
+    
+        // [...] map like previous slide
+        
+        Set<Integer> keys = map.keySet();
+        Collection<String> values = map.values();
+        
+        System.out.println(keys);
+        // prints: [23, 28, 31]
+        
+        System.out.println(values);
+        // prints: [bar, foo, bar]
+    }
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Iterator}
+    To iterate over a map use the iterator from the set of keys.
+    \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+    public static void main (String[] args) {
+    
+        // [...] map, keys, values like previous slide            
+        Iterator<Integer> iter = keys.iterator();
+        
+        while(iter.hasNext()) {
+            System.out.print(map.get(iter.next()) + " ");
+        } // prints: bar foo bar
+        
+        System.out.println(); // print a line break
+        
+        for(Integer i: keys) {
+            System.out.print(map.get(i) + " ");
+        } // prints: bar foo bar
+    }
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Nested Maps}
+    Nested maps offer storage with key pairs.
+    \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+    public static void main (String[] args) {        
+    
+        Map<String, Map<Integer, String>> addresses = 
+            new HashMap<String, Map<Integer, String>>();
+        
+        addresses.put("Noethnitzer Str.", 
+            new HashMap<Integer, String>());
+        
+        addresses.get("Noethnitzer Str.").
+            put(46, "Andreas-Pfitzmann-Bau");
+        addresses.get("Noethnitzer Str.").
+            put(44, "Fraunhofer IWU");
+    }
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Maps and Lambda}
+    \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+        map.forEach((k,v) -> {
+            //Key and Value
+            System.out.println("Key: " + k + ", value: " v);
+        })
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Maps and For Each}
+  You can interate through the entry set of a map (available before Java 1.8)
+    \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+      Map<String, String> map = ...
+      for (Map.Entry<String, String> entry : map.entrySet()) {
+        System.out.println("Key: " + entry.getKey() +
+        ", value" + entry.getValue());
+      }
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}{Overview}
+    \begin{center}
+        \begin{tabular}{ l | l }
+            List & Keeps order of objects \\
+                 & Easily traversible \\
+                 & Search not effective \\
+            \hline
+            Set  & No duplicates \\
+                 & No order - still traversible \\
+                 & Effective searching \\
+            \hline
+            Map  & Key-Value storage \\
+                 & Search super-effective \\
+                 & Traversing difficult
             
-            System.out.println(a);
-        }
-    }
-    \end{lstlisting}
-    A division by zero causes an \emph{ArithmeticException} which is a subclass of \emph{RuntimeException}. 
-    Therefore \emph{ArithmeticException} is unchecked and does not have to be handled.
-\end{frame}
-
-\begin{frame}[fragile]{Try and Catch}
-    Nevertheless the exception can be handled.
-    \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
-    public class Calc {
-    
-        public static void main(String[] args) {
-    
-            try {
-                int a = 7 / 0;
-            } catch (ArithmeticException e) {
-                System.out.println("Division by zero.");
-            }
-        }
-    }
-    \end{lstlisting}
-    The \textbf{catch}-block, also called exception handler,
-    is invoked if the specified exception (ArithmeticException) occurs in the \textbf{try}-block.\\
-    In general there can be multiple catch-blocks handling multiple kinds of exceptions.
-\end{frame}
-
-\begin{frame}[fragile]{Stack Trace}
-    \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
-    public class Calc {
-    
-        public static void main(String[] args) {
-    
-            try {
-                int a = 7 / 0;
-            } catch (ArithmeticException e) {
-                System.out.println("Division by zero.");
-                e.printStackTrace();
-            }
-        }
-    }
-    \end{lstlisting}
-    The stack trace shows the order of method calls leading to point where the exception occurs.
-\end{frame}
-
-\begin{frame}[fragile]{Stack Trace}
-    \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
-    Division by zero.
-    java.lang.ArithmeticException: / by zero
-        at Calc.main(Calc.java:6)
-        at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-        at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-        at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-        at java.lang.reflect.Method.invoke(Method.java:498)
-        at com.intellij.rt.execution.application.AppMain.main(AppMain.java:147)
-    \end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile]{Finally}
-    \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
-    public class Calc {
-    
-        public static void main(String[] args) {
-    
-            try {
-                int a = 7 / 0;
-            } catch (ArithmeticException e) {
-                System.out.println("Division by zero.");
-                e.printStackTrace();
-            } finally {
-                System.out.println("End of program.");
-            }
-        }
-    }
-    \end{lstlisting}
-    The \textbf{finally}-block will always be executed, regardless if an exception occurs.
-\end{frame}
-
-\subsection{Throwing Exceptions}
-\begin{frame}[fragile]{Propagate Exceptions}
-    Unhandled exceptions can be thrown (propagated).
-    \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]    
-    public static int divide (int divident, int divisor) throws ArithmeticException {
-        return divident / divisor;
-    }
-    \end{lstlisting}
-    The method \texttt{int divide(\dots)} propagates the exception to the calling
-    method denoted by the keyword \textbf{throws}.
-\end{frame}
-
-\begin{frame}[fragile]{Propagate Exceptions - Test 1}
-    \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
-    public class Calc {
-    
-        public static int divide (int divident, int divisor) throws ArithmeticException {
-            return divident / divisor;
-        }
-    
-        public static void main(String[] args) {
-    
-            int a = 0;
-            try {
-                a = Calc.divide(7, 0);
-            } catch (ArithmeticException e) {
-                System.out.println("Division by zero.");
-                e.printStackTrace();
-            }
-        }
-    }
-    \end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile]{Propagate Exceptions - Test 2}
-    \begin{lstlisting}[basicstyle=\ttfamily\scriptsize, firstnumber=7]
-    public static void main(String[] args) {
-    
-        int a = 0;
-        try {
-            a = Calc.divide(7, 0);
-        } catch (ArithmeticException e) {
-            System.out.println("Division by zero.");
-            e.printStackTrace();
-        }
-    }
-    \end{lstlisting}
-    In this example there are two jumps in the stack trace:\\
-    \texttt{java.lang.ArithmeticException: / by zero}\\
-    \texttt{at Calc.divide(Calc.java:4)}\\
-    \texttt{at Calc.main(Calc.java:11)}
-\end{frame}
-
-\begin{frame}{Java API}
-    The Java API shows\footnote{\scriptsize\url{https://docs.oracle.com/javase/7/docs/api/}}
-    if a method throws exceptions. 
-    The notation \texttt{throws exception} means that the method can throw 
-    exceptions in case of an unexpected situation.
-    It does not mean that the method throws exception every time.
-    \vfill
-    Check if the Exception is a subclass of \emph{RuntimeException}. 
-    If not the exception has to be handled or rethrown.
-\end{frame}
-
-\begin{frame}[fragile]{Creating new Exceptions}
-    You can create und use your own exception class.
-    \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
-    public class DivisionByZeroException extends Exception {
-
-    }
-    \end{lstlisting}
-    \vfill
-    \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
-    public static int divide (int divident, int divisor) throws DivisionByZeroException {
-        if (divisor == 0) {
-            throw new DivisionByZeroException();
-        }
-        return divident / divisor;
-    }
-    \end{lstlisting}    
-    Exceptions can be thrown manually with the keyword \textbf{throw}.
-\end{frame}
-
-\begin{frame}[fragile]{Creating new Exceptions - Test}
-    \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
-    public static void main(String[] args) {
-    
-        int a = 0;
-        try {
-            a = Calc.divide(7, 0);
-        } catch (DivisionByZeroException e) {
-            System.out.println("Division by zero.");
-            e.printStackTrace();
-        }
-    }
-    \end{lstlisting}    
-    \emph{DivisionByZeroException} is checked and therefore has to be handled.
+        \end{tabular}
+    \end{center}
 \end{frame}
 
 \end{document}
