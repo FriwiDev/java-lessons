@@ -22,6 +22,9 @@ xelatex 06-exceptions.tex
 xelatex 07-collections.tex
 biber 07-collections
 xelatex 07-collections.tex
+xelatex 08-scopes-and-gui.tex
+biber 08-scopes-and-gui
+xelatex 08-scopes-and-gui.tex
 
 cd ../exercises
 xelatex 01-temperature.tex
@@ -35,3 +38,5 @@ xelatex 05a-calculator.tex
 xelatex 05b-two-dimensional.tex
 xelatex 06-fibonacci-array.tex
 xelatex 07-library-part-3.tex
+xelatex 08a-guestbook.tex
+xelatex 08b-guestbook-ui.tex
