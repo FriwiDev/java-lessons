@@ -23,18 +23,17 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>\end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile]{Maven and Audio}
-    \begin{lstlisting}
+    <modelVersion>4.0.0</modelVersion>
+    
     <groupId>com.example</groupId>
     <artifactId>soundboard</artifactId>
-    <version>1.0-SNAPSHOT</version>\end{lstlisting}
+    <version>1.0-SNAPSHOT</version>
+    ...\end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]{Maven and Audio}
-    \begin{lstlisting}
+\begin{lstlisting}
+    ...
     <dependencies>
         <dependency>
             <groupId>javazoom</groupId>
@@ -45,12 +44,12 @@
 </project>\end{lstlisting}
 \end{frame}
 
-\begin{frame}{Maven and Audio}
+\begin{frame}[fragile]{Maven and Audio}
     Now you can use JLayer to play .mp3 files:
     \begin{lstlisting}
     Player player = new Player(new FileInputStream(new File("test.mp3"));
     player.play();\end{lstlisting}
-    You can also use the pausable player I provided in the course materials (you can create a pause button then).
+    You can also use the pausable player provided in the course materials (you can create a pause button then).
 \end{frame}
 
 \begin{frame}{Maven and Audio}
