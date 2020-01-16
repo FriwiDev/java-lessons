@@ -40,3 +40,4 @@ xelatex 06-fibonacci-array.tex
 xelatex 07-library-part-3.tex
 xelatex 08a-guestbook.tex
 xelatex 08b-guestbook-ui.tex
+xelatex 09-maven-and-audio.tex
