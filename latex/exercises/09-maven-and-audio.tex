@@ -16,7 +16,7 @@
     Create a small GUI application, which can play sounds/music from a list using Swing, JLayer and Maven.
 \end{frame}
 
-\begin{frame}{Maven and Audio}
+\begin{frame}[fragile]{Maven and Audio}
     Use a Maven build environment to fetch the JLayer library. Example pom.xml:
     \begin{lstlisting}
     <?xml version="1.0" encoding="UTF-8"?>
@@ -27,16 +27,14 @@
 \end{frame}
 
 \begin{frame}[fragile]{Maven and Audio}
-    Create a small GUI application, which can play sounds/music from a list using Swing, JLayer and Maven.
-\end{frame}
-
-\begin{frame}{Maven and Audio}
-    Use a Maven build environment to fetch the JLayer library. Example pom.xml:
     \begin{lstlisting}
     <groupId>com.example</groupId>
     <artifactId>soundboard</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0-SNAPSHOT</version>\end{lstlisting}
+\end{frame}
 
+\begin{frame}[fragile]{Maven and Audio}
+    \begin{lstlisting}
     <dependencies>
         <dependency>
             <groupId>javazoom</groupId>
@@ -51,8 +49,7 @@
     Now you can use JLayer to play .mp3 files:
     \begin{lstlisting}
     Player player = new Player(new FileInputStream(new File("test.mp3"));
-    player.play();
-    \end{lstlisting}
+    player.play();\end{lstlisting}
     You can also use the pausable player I provided in the course materials (you can create a pause button then).
 \end{frame}
 
